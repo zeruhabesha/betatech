@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { motion } from "framer-motion"
-import hero_bg from "../../../assets/images/hero/hero-2.png"
 import shap_2 from "../../../assets/images/shape/shape-2.png"
 import { slideUp } from '../../../utlits/slideUp'
 import ModalVideo from 'react-modal-video';
@@ -8,8 +7,16 @@ import "react-modal-video/scss/modal-video.scss";
 import { Link } from 'react-router-dom'
 import { useSiteSettings } from '../../../context/siteSettings'
 
+const securityNodes = [
+    { className: "node node-one", label: "SOC", x: "20%", y: "21%" },
+    { className: "node node-two", label: "AI", x: "69%", y: "27%" },
+    { className: "node node-three", label: "EDR", x: "25%", y: "74%" },
+    { className: "node node-four", label: "SIEM", x: "76%", y: "76%" },
+]
+
 const BannerOne = () => {
     const [isOpen, setOpen] = useState(false);
+    const [isScanning, setIsScanning] = useState(false);
     const { t } = useSiteSettings();
     return (
         <section className="banner-area">
@@ -41,15 +48,71 @@ const BannerOne = () => {
                     </div>
                     <div className="col-lg-6">
                         <motion.div className="banner-image"
-                            style={{ overflow: "hidden", borderRadius: "10px" }}
-                            animate={{ y: [0, -18, 0] }}
+                            role="img"
+                            aria-label="Animated cybersecurity shield scanning connected systems"
+                            onClick={() => setIsScanning((active) => !active)}
+                            onKeyDown={(event) => {
+                                if (event.key === "Enter" || event.key === " ") {
+                                    event.preventDefault();
+                                    setIsScanning((active) => !active);
+                                }
+                            }}
+                            tabIndex={0}
+                            whileHover={{ y: -8 }}
+                            animate={{ y: [0, -14, 0] }}
                             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                         >
-                            <motion.img src={hero_bg} alt="banner-image"
-                                style={{ width: "100%", display: "block" }}
-                                animate={{ scale: [1, 1.08, 1] }}
-                                transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-                            />
+                            <div className={`hero-security-visual ${isScanning ? "is-scanning" : ""}`}>
+                                <div className="scan-grid"></div>
+                                <motion.div
+                                    className="shield-core"
+                                    animate={{ scale: isScanning ? [1, 1.04, 1] : [1, 1.02, 1] }}
+                                    transition={{ duration: isScanning ? 1.8 : 4.5, repeat: Infinity, ease: "easeInOut" }}
+                                >
+                                    <svg viewBox="0 0 160 188" aria-hidden="true">
+                                        <path className="shield-fill" d="M80 8 142 31v51c0 46-25 78-62 98-37-20-62-52-62-98V31L80 8Z" />
+                                        <path className="shield-line" d="M80 27 124 43v39c0 34-17 58-44 74-27-16-44-40-44-74V43l44-16Z" />
+                                        <path className="shield-check" d="m54 91 18 18 38-48" />
+                                    </svg>
+                                </motion.div>
+
+                                <svg className="network-lines" viewBox="0 0 600 460" aria-hidden="true">
+                                    <path d="M126 102 C210 102 238 184 300 226" />
+                                    <path d="M418 130 C370 160 338 190 300 226" />
+                                    <path d="M158 342 C222 306 250 274 300 226" />
+                                    <path d="M454 352 C394 314 350 280 300 226" />
+                                </svg>
+
+                                {securityNodes.map((node, index) => (
+                                    <motion.div
+                                        key={node.label}
+                                        className={node.className}
+                                        style={{ left: node.x, top: node.y }}
+                                        animate={{
+                                            scale: isScanning ? [1, 1.12, 1] : [1, 1.05, 1],
+                                            opacity: [0.82, 1, 0.82],
+                                        }}
+                                        transition={{ duration: 2.4, repeat: Infinity, delay: index * 0.35, ease: "easeInOut" }}
+                                    >
+                                        {node.label}
+                                    </motion.div>
+                                ))}
+
+                                <motion.div
+                                    className="scan-ring ring-one"
+                                    animate={{ scale: [0.76, 1.22], opacity: [0.36, 0] }}
+                                    transition={{ duration: 2.8, repeat: Infinity, ease: "easeOut" }}
+                                />
+                                <motion.div
+                                    className="scan-ring ring-two"
+                                    animate={{ scale: [0.6, 1.08], opacity: [0.28, 0] }}
+                                    transition={{ duration: 2.8, repeat: Infinity, delay: 1.1, ease: "easeOut" }}
+                                />
+                                <div className="visual-status">
+                                    <span>{isScanning ? t("Active Scan") : t("Protected")}</span>
+                                    <strong>{isScanning ? "99.9%" : "24/7"}</strong>
+                                </div>
+                            </div>
                         </motion.div>
                     </div>
                 </motion.div>

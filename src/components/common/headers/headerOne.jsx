@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import black_logo from "../../../assets/images/black-logo.png"
 import white_logo from "../../../assets/images/white-logo.png"
 import { Link } from 'react-router-dom'
 import useStickyHeader from '../../../hooks/useStickyHeader'
@@ -13,7 +14,7 @@ const HeaderOne = ({ }) => {
     useStickyHeader()
     const [othersOption, setOtherOption] = useState(false)
     const [menuActive, setMenuActive] = useState(false)
-    const { t } = useSiteSettings()
+    const { t, theme } = useSiteSettings()
 
     return (
         <>
@@ -24,7 +25,7 @@ const HeaderOne = ({ }) => {
                     <div className="container-fluid">
                         <nav className="navbar navbar-expand-md navbar-light">
                             <Link className="navbar-brand me-0" to="/">
-                                <img src={white_logo} className="black-logo" alt="logo" />
+                                <img src={theme === 'dark' ? white_logo : black_logo} className="black-logo" alt="logo" />
                             </Link>
 
                             <div className="collapse navbar-collapse mean-menu" id="navbarSupportedContent">

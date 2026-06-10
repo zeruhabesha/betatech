@@ -4449,3 +4449,111 @@
     }
 
 }
+
+@media only screen and (max-width: 767px) {
+    .navbar-area,
+    .navbar-area.style-2 {
+        background-color: var(--btb-header-bg);
+        border-bottom: 1px solid var(--btb-header-border);
+        box-shadow: var(--btb-header-shadow);
+    }
+
+    .navbar-area.is-sticky {
+        background-color: var(--btb-header-bg) !important;
+    }
+
+    .banner-area {
+        .container-fluid {
+            width: 100%;
+            max-width: 100%;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        [class*="col-"] {
+            padding-left: 0;
+            padding-right: 0;
+            min-width: 0;
+        }
+    }
+
+    .banner-content {
+        width: 100%;
+        max-width: calc(100vw - 24px) !important;
+        min-width: 0;
+
+        .title {
+            width: 100%;
+            max-width: 100%;
+
+            h1 {
+                font-size: 25px;
+                line-height: 1.28;
+                max-width: calc(100vw - 44px);
+            }
+
+            p {
+                width: 320px;
+                font-size: 14px;
+                line-height: 26px;
+                max-width: calc(100vw - 48px);
+                overflow-wrap: break-word;
+                word-break: normal;
+            }
+        }
+    }
+
+    .banner-image {
+        width: 100%;
+        max-width: calc(100vw - 24px) !important;
+        overflow: hidden;
+    }
+
+    .hero-security-visual {
+        min-height: 370px;
+
+        .shield-core {
+            width: 128px;
+            height: 152px;
+            top: 76px;
+        }
+
+        .node {
+            width: 58px;
+            height: 58px;
+            border-radius: 14px;
+            font-size: 11px;
+        }
+
+        .scan-ring {
+            width: 220px;
+            height: 220px;
+            top: 48px;
+            left: calc(50% - 110px);
+        }
+
+        .ring-two {
+            width: 172px;
+            height: 172px;
+            top: 74px;
+            left: calc(50% - 86px);
+        }
+
+        .visual-status {
+            left: 18px;
+            right: 18px;
+            bottom: 22px;
+            min-height: 60px;
+            padding: 14px 16px;
+
+            strong {
+                font-size: 18px;
+            }
+        }
+    }
+}

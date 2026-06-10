@@ -7,7 +7,7 @@ const According = ({ id, question, ans, parentId, showId }) => {
         <>
             <div className="accordion-item">
                 <h2 className="accordion-header" id={id}>
-                    <button className={`accordion-button ${id === showId ? "" : ""} `} type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${id}`} aria-expanded={id === showId ? "true" : "false"} aria-controls={`collapse${id}`}>
+                    <button className={`accordion-button ${id === showId ? "" : "collapsed"} `} type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${id}`} aria-expanded={id === showId ? "true" : "false"} aria-controls={`collapse${id}`}>
                         <span>{t(question)}</span>
                     </button>
                 </h2>
